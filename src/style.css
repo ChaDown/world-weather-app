@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400&display=swap');
+
+:root {
+  --default-page-height: ;
+}
+
+body {
+  max-width: 100vw;
+  background-image: url('./assets/bg-img.jpg');
+  background-size: 100vw;
+  color: white;
+  font-family: 'Oxygen', sans-serif;
+  font-size: 1.5rem;
+  overflow: auto;
+}
+
+.search-container {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  padding: 1.5rem 0;
+}
+
+input {
+  background: none;
+  color: white;
+  border: none;
+  border-bottom: 1px white solid;
+  margin-right: 5px;
+}
+
+input::placeholder {
+  color: white;
+}
+
+input:focus {
+  outline: none;
+}
+
+.search-btn {
+  height: 1.3rem;
+}
+
+.search-btn:hover {
+  height: 1.5rem;
+}
+
+.upper-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 5%;
+}
+
+.description {
+  font-size: 3rem;
+}
+
+.place,
+.time,
+.temp {
+  font-weight: 300;
+}
+
+.text {
+  font-size: 0.7rem;
+  margin-top: 10px;
+}
+
+.left-text {
+  margin-bottom: 10px;
+}
+
+.forecast-container {
+  max-width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  bottom: 0;
+  margin-bottom: 10%;
+  margin-top: 10%;
+}
+
+.weather-info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.forecast-day {
+  width: calc(100vw / 5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.temp-min {
+  font-size: 0.7rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.unit-btn {
+  background-color: transparent;
+  border: solid white 1px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.unit-btn:hover {
+  background-color: rgba(255, 255, 255, 0.136);
+}
