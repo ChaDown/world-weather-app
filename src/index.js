@@ -29,11 +29,6 @@ async function getData(location) {
   return { filteredData, filteredForecastData };
 }
 
-// (async () => {
-//   const inputData = await getData('cork');
-//   console.log(inputData);
-// })();
-
 function searchHandler(e) {
   e.preventDefault();
 
@@ -41,7 +36,6 @@ function searchHandler(e) {
 
   (async () => {
     const inputWeather = await getData(input);
-    console.log(inputWeather);
     setBackgroundImage(inputWeather);
     renderMain(inputWeather);
     renderForecast(inputWeather);

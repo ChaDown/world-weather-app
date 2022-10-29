@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable camelcase */
 /* eslint-disable no-plusplus */
 import { format, fromUnixTime } from 'date-fns';
@@ -75,6 +76,19 @@ export function dataFilter(obj) {
   };
 }
 
+function getExtremeTemp(arr, type) {
+  const tempsArr = [];
+  let extremeTemp;
+  if (type === 'max') {
+    arr.forEach((el) => tempsArr.push(el.tempMax));
+    extremeTemp = tempsArr.reduce((a, b) => Math.max(a, b));
+  } else if (type === 'min') {
+    arr.forEach((el) => tempsArr.push(el.tempMin));
+    extremeTemp = tempsArr.reduce((a, b) => Math.min(a, b));
+  }
+  return extremeTemp;
+}
+
 export function forecastFilter(obj) {
   const forecastArr = [];
   const daysArr = obj.list;
@@ -91,8 +105,31 @@ export function forecastFilter(obj) {
     forecastArr.push(weather);
   });
 
-  // Use filter method to only have values at 13:00hrs every day
-  const dailyForecasts = forecastArr.filter((el) => el.time === '13');
+  // Group forecasts into same day arrays
+  const groupedArray = [[forecastArr[0]]];
+
+  for (let i = 1; i < forecastArr.length; i++) {
+    // If the day value of the i object matches the last item in the previous array, push it to that array.
+    const lastArr = groupedArray[groupedArray.length - 1];
+    const lastObj = lastArr[lastArr.length - 1];
+
+    if (forecastArr[i].day === lastObj.day) {
+      lastArr.push(forecastArr[i]);
+    } else groupedArray.push([forecastArr[i]]);
+  }
+
+  // Return one object per day, with daily max and min and weather at midday.
+  const dailyForecasts = [];
+
+  for (let i = 1; i < 5; i++) {
+    const dayForecast = {
+      day: groupedArray[i][1].day,
+      icon: groupedArray[i][4].icon,
+      tempMax: getExtremeTemp(groupedArray[i], 'max'),
+      tempMin: getExtremeTemp(groupedArray[i], 'min'),
+    };
+    dailyForecasts.push(dayForecast);
+  }
 
   return dailyForecasts;
 }
