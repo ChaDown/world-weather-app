@@ -7,7 +7,7 @@ import { renderMain, renderForecast } from './view';
 async function getData(location) {
   const APIkey = 'b5147fb350104350b3316f931f7ceee4';
   const response = await fetch(
-    `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=5&appid=${APIkey}
+    `https://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=5&appid=${APIkey}
     `
   );
 
